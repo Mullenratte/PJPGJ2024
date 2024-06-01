@@ -22,9 +22,7 @@ public class Player : MonoBehaviour
             } else {
                 this.isCarryingObject = true;
             }
-            if (value.TryGetComponent<IPickable>(out IPickable pickedObj)) {
-                ApplyPickedObjectStatusChanges(pickedObj);
-            }            
+            ApplyPickedObjectStatusChanges(pickedObject?.GetComponent<IPickable>());
         }
     }
     private bool isCarryingObject;
@@ -37,15 +35,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float velocityMax;
     [SerializeField] private float jumpStrength;
     [SerializeField] private LayerMask walkableLayer;
-    [SerializeField] private Animator anim;
     [SerializeField] private Transform grabHitbox;
     [SerializeField] private Transform carryTransform;
-
-    public event EventHandler<OnMovingSidewardsEventArgs> OnMovingSidewards;
-
-    public class OnMovingSidewardsEventArgs : EventArgs {
-        public float movementDirX;
-    }
 
     public enum State { 
         Grounded,
@@ -106,26 +97,6 @@ public class Player : MonoBehaviour
             rb.AddForce(moveDir * acceleration * Time.fixedDeltaTime * walkSpeedPenaltyMultiplier);
         } else {
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * velocityMax, rb.velocity.y);
-        }
-    }
-
-    private void Update() {
-        switch (state) {
-            case State.Grounded:
-                anim.SetBool("IsGrounded", true);
-                break;
-            case State.Airborne:
-                anim.SetBool("IsGrounded", false);
-                break;
-            default:
-                break;
-        }
-
-        if (Mathf.Abs(rb.velocity.x) > 0) {
-            anim.SetBool("IsMovingSidewards", true);
-            OnMovingSidewards?.Invoke(this, new OnMovingSidewardsEventArgs { movementDirX = rb.velocity.x });
-        } else {
-            anim.SetBool("IsMovingSidewards", false);
         }
     }
 
@@ -204,6 +175,13 @@ public class Player : MonoBehaviour
         
     }
 
+    public State GetState() {
+        return this.state;
+    }
+
+    public Vector2 GetVelocity() {
+        return rb.velocity;
+    }
 }
 
 
