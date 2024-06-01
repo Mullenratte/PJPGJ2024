@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7216992727037097309}
   - component: {fileID: 3604916046195919838}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Grab Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
