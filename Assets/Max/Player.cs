@@ -140,7 +140,25 @@ public class Player : MonoBehaviour
         if (enemyLayer.value == 1 << collision.gameObject.layer) {
             collision.gameObject.TryGetComponent<EnemyScript>(out EnemyScript enemy);
             healthSystem.Damage(/*enemy.damage*/1);
+
         }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision) {
+        if (enemyLayer.value == (1 << collision.gameObject.layer)) {
+            RaycastHit2D[] raycastHits = Physics2D.RaycastAll(transform.position, Vector2.down, 1f);
+            foreach (var hit in raycastHits) {
+                if ((1 << hit.collider.gameObject.layer) == enemyLayer.value) {
+                    state = State.Grounded;
+                    break;
+                }
+            }
+
+        }
+    }
+
+    private void OnDrawGizmos() {
+        Debug.DrawRay(transform.position, Vector2.down, Color.red);
     }
 
     private void TryGrab() {
