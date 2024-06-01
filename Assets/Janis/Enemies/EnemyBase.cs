@@ -1,5 +1,6 @@
 using Janis.Enemies;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyBase : MonoBehaviour
@@ -9,7 +10,9 @@ public class EnemyBase : MonoBehaviour
 
     protected MovementResolver movementResolver;
     public Rigidbody2D RigidBody { get; protected set; }
-
+    public UnityEvent<GameObject> OnEntityHit;
+    
+    
     private void Awake()
     {
         RigidBody = GetComponent<Rigidbody2D>();
