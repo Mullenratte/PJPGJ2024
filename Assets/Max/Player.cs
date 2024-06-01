@@ -1,3 +1,5 @@
+using Janis;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour
 
     private float jumpHeightPenaltyMultiplier = 1f;
     private float walkSpeedPenaltyMultiplier = 1f;
+    private float dropObjectPositionXOffset;
     private HealthSystem healthSystem;
 
 
@@ -77,15 +80,15 @@ public class Player : MonoBehaviour
         TryJump();
     }
 
-
-
     private void Move_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         if (obj.ReadValue<Vector2>().magnitude != 0) {
             moveDir = obj.ReadValue<Vector2>();
             if (moveDir.x > 0) {
                 transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                dropObjectPositionXOffset = 1f;
             } else {
-                transform.rotation = Quaternion.Euler(0f, 0, 0f);
+                transform.rotation = Quaternion.Euler(0f, 0, 0f); 
+                dropObjectPositionXOffset = -1f;
             }
         } 
     }
@@ -129,23 +132,28 @@ public class Player : MonoBehaviour
         state = State.Airborne;
     }
 
-    private void Update() {
-        Debug.Log("state: " + state);
-    }
-
     private void OnCollisionEnter2D(Collision2D collision) {
         if (walkableLayer.value == 1 << collision.gameObject.layer) {
             state = State.Grounded;
         }
 
         if (enemyLayer.value == 1 << collision.gameObject.layer) {
-            collision.gameObject.TryGetComponent<EnemyBase>(out EnemyBase enemy);
+            collision.gameObject.TryGetComponent<EnemyScript>(out EnemyScript enemy);
             healthSystem.Damage(/*enemy.damage*/1);
         }
     }
 
     private void TryGrab() {
-        GameObject pickableObject = Physics2D.OverlapCircle(grabHitbox.position, grabHitbox.localScale.magnitude).gameObject;
+        GameObject pickableObject = null;
+        Collider2D[] collisions = Physics2D.OverlapCircleAll(grabHitbox.position, 1f);
+        foreach (var coll in collisions) {
+            if (coll.GetComponent<IPickable>() != null) {
+                pickableObject = coll.gameObject;
+                Debug.Log("found obj to pick");
+                break;
+            }
+        }
+        
 
         if(this.PickedObject == null) {
             TryPickUpObject(pickableObject);
@@ -155,7 +163,7 @@ public class Player : MonoBehaviour
     }
 
     private void TryPickUpObject(GameObject pickableObject) {
-        if (pickableObject.GetComponent<IPickable>() != null) {
+        if (pickableObject?.GetComponent<IPickable>() != null) {
             this.PickedObject = pickableObject;
 
             pickableObject.transform.SetParent(carryTransform);
@@ -171,6 +179,7 @@ public class Player : MonoBehaviour
 
     private void DropPickedObject() {
         PickedObject.transform.SetParent(null);
+        PickedObject.transform.position = new Vector2(carryTransform.position.x + dropObjectPositionXOffset, carryTransform.position.y);
 
         PickedObject.TryGetComponent<Rigidbody2D>(out Rigidbody2D pickedObjectRigidbody);
         pickedObjectRigidbody.simulated = true;
@@ -181,7 +190,6 @@ public class Player : MonoBehaviour
     }
 
     private void ApplyPickedObjectStatusChanges(IPickable pickedObject) {
-        Debug.Log(pickedObject);
         if (pickedObject != null) {
             SO_CorpseStats objectStats = pickedObject.GetCorpseStats();
 
