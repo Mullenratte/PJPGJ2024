@@ -16,10 +16,10 @@ public class PlayerVisual : MonoBehaviour
     }
 
     private void Player_OnMovingSidewards(object sender, Player.OnMovingSidewardsEventArgs e) {
-        if (e.movementDirX < 0) {
-            spriteRenderer.flipX = false;
-        } else {
-            spriteRenderer.flipX = true;
-        }
+        //if (e.movementDirX < 0) {
+        //    spriteRenderer.flipX = false;
+        //} else {
+        //    spriteRenderer.flipX = true;
+        //}
     }
 }
