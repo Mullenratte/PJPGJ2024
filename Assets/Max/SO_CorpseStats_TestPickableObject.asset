@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SO_CorpseStats_TestPickableObject
   m_EditorClassIdentifier: 
   walkSpeedPenalty: 0.5
-  jumpHeightPenalty: 0
+  jumpHeightPenalty: 0.5
   isBlockingJump: 0
