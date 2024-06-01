@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1612651516778279147}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Carry Transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7216992727037097309}
   - component: {fileID: 3604916046195919838}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grab Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 1102744065988950672}
   - component: {fileID: 7405436749903628141}
   - component: {fileID: 7408771791031237760}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 7070036585035229926}
   - component: {fileID: 6786281894589158061}
   - component: {fileID: 302031691319287555}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
