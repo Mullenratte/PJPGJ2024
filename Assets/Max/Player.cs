@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Player : MonoBehaviour
 {
@@ -29,12 +24,14 @@ public class Player : MonoBehaviour
 
     private float jumpHeightPenaltyMultiplier = 1f;
     private float walkSpeedPenaltyMultiplier = 1f;
+    private HealthSystem healthSystem;
 
 
     [SerializeField] private float acceleration;
     [SerializeField] private float velocityMax;
     [SerializeField] private float jumpStrength;
     [SerializeField] private LayerMask walkableLayer;
+    [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Transform grabHitbox;
     [SerializeField] private Transform carryTransform;
 
@@ -48,11 +45,23 @@ public class Player : MonoBehaviour
     private void Awake() {
         input = new InputActions();
         rb = GetComponent<Rigidbody2D>();
+        healthSystem = GetComponent<HealthSystem>();
 
         input.Player.Move.performed += Move_performed;
         input.Player.Move.canceled += Move_canceled;
         input.Player.Jump.performed += Jump_performed;
         input.Player.Grab.performed += Grab_performed;
+
+        healthSystem.OnDamaged += HealthSystem_OnDamaged;
+        healthSystem.OnDeath += HealthSystem_OnDeath;
+    }
+
+    private void HealthSystem_OnDeath(object sender, System.EventArgs e) {
+        Destroy(gameObject);
+    }
+
+    private void HealthSystem_OnDamaged(object sender, System.EventArgs e) {
+        Debug.Log("Damaged player!");
     }
 
     private void Grab_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
@@ -120,6 +129,11 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision) {
         if (walkableLayer.value == 1<<collision.gameObject.layer) {
             state = State.Grounded;
+        }
+
+        if (enemyLayer.value == 1 << collision.gameObject.layer) {
+            collision.gameObject.TryGetComponent<EnemyBase>(out EnemyBase enemy);
+            healthSystem.Damage(/*enemy.damage*/1);
         }
     }
 

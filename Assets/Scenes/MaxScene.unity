@@ -624,9 +624,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 787551576}
-  - component: {fileID: 787551575}
   - component: {fileID: 787551579}
   - component: {fileID: 787551578}
+  - component: {fileID: 787551575}
+  - component: {fileID: 787551580}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -648,11 +649,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 5000
   velocityMax: 10
-  jumpStrength: 500
+  jumpStrength: 750
   walkableLayer:
     serializedVersion: 2
     m_Bits: 64
-  anim: {fileID: 374633283}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
   grabHitbox: {fileID: 1013594367}
   carryTransform: {fileID: 474656895}
 --- !u!4 &787551576
@@ -735,6 +738,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.5, y: 1}
   m_Direction: 0
+--- !u!114 &787551580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787551574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 410952313ac412c44a361a690536456b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
 --- !u!1 &838214589
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,7 +761,7 @@ GameObject:
   m_Component:
   - component: {fileID: 838214590}
   - component: {fileID: 838214591}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -908,7 +924,7 @@ GameObject:
   - component: {fileID: 1088615151}
   - component: {fileID: 1088615150}
   - component: {fileID: 1088615153}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pickable Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
