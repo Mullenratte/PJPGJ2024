@@ -7,8 +7,9 @@ public class HealthSystem : MonoBehaviour
     private int healthMax;
 
     public event EventHandler OnDeath;
-    public event EventHandler OnDamaged;
+    public event EventHandler<OnDamagedEventArgs> OnDamaged;
 
+    public class OnDamagedEventArgs : EventArgs { public float damageAmount; }
 
     private void Awake() {
         healthMax = health;
@@ -17,7 +18,7 @@ public class HealthSystem : MonoBehaviour
     public void Damage(int damageAmount) {
         health -= damageAmount;
 
-        OnDamaged?.Invoke(this, EventArgs.Empty);
+        OnDamaged?.Invoke(this, new OnDamagedEventArgs { damageAmount = damageAmount});
 
         if (health <= 0) {
             health = 0;
