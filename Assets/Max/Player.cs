@@ -147,7 +147,7 @@ public class Player : MonoBehaviour
 
         if (enemyLayer.value == (1 << collision.gameObject.layer)) {
             collision.gameObject.TryGetComponent<EnemyScript>(out EnemyScript enemy);
-            //healthSystem.Damage(/*enemy.damage*/1);
+            healthSystem.Damage(/*enemy.damage*/1);
 
         }
     }
