@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -121,13 +122,19 @@ public class Player : MonoBehaviour
     }
 
     private void Jump() {
+        if (jumpHeightPenaltyMultiplier <= 0f) return;
+
         Vector2 jumpVec = new Vector2(0f, jumpStrength);
         rb.AddForce(jumpVec * jumpHeightPenaltyMultiplier);
         state = State.Airborne;
     }
 
+    private void Update() {
+        Debug.Log("state: " + state);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (walkableLayer.value == 1<<collision.gameObject.layer) {
+        if (walkableLayer.value == 1 << collision.gameObject.layer) {
             state = State.Grounded;
         }
 
@@ -174,6 +181,7 @@ public class Player : MonoBehaviour
     }
 
     private void ApplyPickedObjectStatusChanges(IPickable pickedObject) {
+        Debug.Log(pickedObject);
         if (pickedObject != null) {
             SO_CorpseStats objectStats = pickedObject.GetCorpseStats();
 
