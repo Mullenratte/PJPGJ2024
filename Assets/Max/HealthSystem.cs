@@ -32,4 +32,12 @@ public class HealthSystem : MonoBehaviour
     public float GetHealthNormalized() {
         return (float)this.health / healthMax;
     }
+
+    public int GetHealth() {
+        return health;
+    }
+
+    public int GetHealthMax() {
+        return healthMax;
+    }
 }
