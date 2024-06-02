@@ -242,10 +242,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackHitbox: {fileID: 9195300051727026895}
-  hitboxRadius: 1
+  hitboxRadius: 0.5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  attackDamage: 1
 --- !u!1 &6663201539526789785
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,6 +284,7 @@ Transform:
   - {fileID: 7216992727037097309}
   - {fileID: 1612651516778279147}
   - {fileID: 6960903975184712382}
+  - {fileID: 2549819312723908935}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &7556702585772868406
@@ -336,7 +338,7 @@ Rigidbody2D:
   m_LinearDrag: 3.5
   m_AngularDrag: 0.05
   m_GravityScale: 5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 13c37b64d5902d743a10a650ee2aa7b1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -362,14 +364,17 @@ MonoBehaviour:
   acceleration: 5000
   velocityMax: 10
   jumpStrength: 1000
-  walkableLayer:
-    serializedVersion: 2
+  walkableLayers:
+  - serializedVersion: 2
+    m_Bits: 256
+  - serializedVersion: 2
     m_Bits: 64
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   grabHitbox: {fileID: 7216992727037097309}
   carryTransform: {fileID: 1612651516778279147}
+  groundCheckTransform: {fileID: 2549819312723908935}
 --- !u!114 &302031691319287555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +388,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
+--- !u!1 &8087037341853754545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2549819312723908935}
+  m_Layer: 3
+  m_Name: GroundCheck Transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2549819312723908935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087037341853754545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8281086905947956198}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9195300051727026895
 GameObject:
   m_ObjectHideFlags: 0
