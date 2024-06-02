@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2301520192859827415}
   - component: {fileID: 5790111622137296150}
   - component: {fileID: -2103035288783044644}
+  - component: {fileID: 5717028483313087108}
   m_Layer: 7
   m_Name: Plant
   m_TagString: Untagged
@@ -71,11 +72,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1147314091
+  m_SortingLayer: 2
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: fa6d9f54f6d9c1e40865f2efa0fea29d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8584906, g: 0.59527415, b: 0.6146638, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -130,3 +131,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.87431335}
   m_EdgeRadius: 0
+--- !u!114 &5717028483313087108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6151071661538943969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d43292115ed444daf6f596622d4bf3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTouchedGameObject:
+    m_PersistentCalls:
+      m_Calls: []
+  MovementMode: 0
+  GroundCollider2D: {fileID: 0}
+  StepHeight: {fileID: 0}
+  MoveSpeed: 1
+  Gravity: 1
+  Direction: {x: 0, y: 0}
+  Velocity: {x: 0, y: 0}
+  stoppingAtGap: 0
+  damage: 0
+  corpsePrefab: {fileID: 0}
+  corpseLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  onDeathAudioSourcePrefab: {fileID: 0}
+  anim: {fileID: 0}

@@ -8,8 +8,10 @@ public class HealthSystem : MonoBehaviour
 
     public event EventHandler OnDeath;
     public event EventHandler<OnDamagedEventArgs> OnDamaged;
+    public event EventHandler<OnHealedEventArgs> OnHealed;
 
     public class OnDamagedEventArgs : EventArgs { public float damageAmount; }
+    public class OnHealedEventArgs : EventArgs { public float healAmount; }
 
     private void Awake() {
         healthMax = health;
@@ -24,6 +26,18 @@ public class HealthSystem : MonoBehaviour
             health = 0;
             Die();
         }
+    }
+
+    public void Heal(int healAmount) {
+        health += healAmount;
+
+        if (health >= healthMax) {
+            health = healthMax;
+        }
+
+        OnHealed?.Invoke(this, new OnHealedEventArgs { healAmount = healAmount });
+
+
     }
 
     private void Die() {

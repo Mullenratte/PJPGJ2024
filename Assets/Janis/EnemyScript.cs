@@ -53,12 +53,15 @@ namespace Janis
             state = 0; //idle
         }
         private void Start() {
+            if (healthSystem != null) {
             healthSystem.OnDamaged += HealthSystem_OnDamaged;
             healthSystem.OnDeath += HealthSystem_OnDeath;
+
+            }
         }
 
         private void HealthSystem_OnDamaged(object sender, HealthSystem.OnDamagedEventArgs e) {
-            anim.SetTrigger("OnDamaged");
+            if (anim != null) anim.SetTrigger("OnDamaged");
             entitySounds.PlayDamagedSound();
         }
 
@@ -81,9 +84,9 @@ namespace Janis
             }
 
             if (Mathf.Abs(Velocity.x) > 0) {
-                anim.SetBool("IsWalking", true);
+                if (anim != null) anim.SetBool("IsWalking", true);
             } else {
-                anim.SetBool("IsWalking", false);
+                if (anim != null) anim.SetBool("IsWalking", false);
             }
         }
 

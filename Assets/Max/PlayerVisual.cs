@@ -7,7 +7,7 @@ public class PlayerVisual : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private GameObject onHurtAudioPrefab;
     [SerializeField] private GameObject onLandedAudioPrefab;
-    [SerializeField] private GameObject onJumpedAudioPrefab;
+    [SerializeField] private GameObject[] onJumpedAudioPrefabs;
     private PlayerAttack playerAttack;
     private Animator anim;
 
@@ -30,7 +30,8 @@ public class PlayerVisual : MonoBehaviour
     }
 
     private void Player_OnJumped() {
-        Instantiate(onJumpedAudioPrefab, transform.position, Quaternion.identity);
+        int rnd = Random.Range(0, onJumpedAudioPrefabs.Length);
+        Instantiate(onJumpedAudioPrefabs[rnd], transform.position, Quaternion.identity);
     }
 
     private void Player_OnDamaged() {
