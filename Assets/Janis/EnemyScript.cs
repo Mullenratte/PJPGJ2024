@@ -27,7 +27,7 @@ namespace Janis
         public Vector2 Direction;
         public Vector2 Velocity;
         public bool stoppingAtGap;
-
+        public int damage;
 
         [Header("Corpse")]
         [SerializeField] private GameObject corpsePrefab;

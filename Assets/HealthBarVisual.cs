@@ -17,18 +17,25 @@ public class HealthBarVisual : MonoBehaviour
     private void Start() {
         healthSystem.OnDamaged += HealthSystem_OnDamaged;
 
-        for (int i = 0; i < healthSystem.GetHealthMax(); i++) {
+        UpdateUI();
+    }
+
+    private void HealthSystem_OnDamaged(object sender, HealthSystem.OnDamagedEventArgs e) {
+        UpdateUI();
+    }
+
+    private void UpdateUI() {
+        foreach (var heart in hearts) {
+            Destroy(heart);
+        }
+
+        hearts = new List<GameObject>();
+
+        for (int i = 0; i < healthSystem.GetHealth(); i++) {
             GameObject heart = Instantiate(heartFullPrefab);
             hearts.Add(heart);
             heart.transform.SetParent(this.transform);
             heart.transform.localScale = Vector3.one;
-        }
-    }
-
-    private void HealthSystem_OnDamaged(object sender, HealthSystem.OnDamagedEventArgs e) {
-        for (int i = 0; i < e.damageAmount; i++) {
-            Destroy(hearts[i]);
-            hearts.RemoveAt(i);
         }
     }
 

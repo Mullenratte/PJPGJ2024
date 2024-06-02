@@ -151,14 +151,9 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision) {
         if (enemyLayer.value == (1 << collision.gameObject.layer)) {
             collision.gameObject.TryGetComponent<EnemyScript>(out EnemyScript enemy);
-            healthSystem.Damage(/*enemy.damage*/1);
-
+            healthSystem.Damage(enemy.damage);
         }
     }
-
-    //private void OnDrawGizmos() {
-    //    Debug.DrawRay(transform.position, Vector2.down, Color.red);
-    //}
 
     private void TryGrab() {
         GameObject pickableObject = null;
