@@ -26,7 +26,7 @@ public class door_Button : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((1 << collision.gameObject.layer) == playerLayer.value || (1 << collision.gameObject.layer) == corpseLayer.value)
+        if (((1 << collision.gameObject.layer) == playerLayer.value || (1 << collision.gameObject.layer) == corpseLayer.value) && !isPressed)
         {
             isPressed = true;
             //Debug.Log("Button pressed");

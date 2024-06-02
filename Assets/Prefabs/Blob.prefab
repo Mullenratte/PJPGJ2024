@@ -99,7 +99,7 @@ MonoBehaviour:
   GroundCollider2D: {fileID: 0}
   StepHeight: {fileID: 0}
   MoveSpeed: 1
-  Gravity: 1
+  Gravity: 3
   Direction: {x: 1, y: 0}
   Velocity: {x: 3, y: 0}
   corpsePrefab: {fileID: 8035161881711870747, guid: f2ac34e643847594ea03893659b71723, type: 3}
