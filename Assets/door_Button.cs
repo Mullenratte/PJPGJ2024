@@ -14,7 +14,8 @@ public class door_Button : MonoBehaviour
     [SerializeField] Sprite pressed;
     private GameObject detected;
 
-    [SerializeField] GameObject door;
+    [SerializeField] GameObject doorOrPlatform;
+    [SerializeField] private bool isActiveAtStart;
 
 
     private void Awake()
@@ -32,19 +33,19 @@ public class door_Button : MonoBehaviour
             SpriteRenderer_Button.sprite = pressed;
             detected = collision.gameObject;
 
-            door.SetActive(false);
+            doorOrPlatform.SetActive(!isActiveAtStart);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject == detected)
+        if (collision.gameObject != null && collision.gameObject == detected)
         {
             isPressed = false;
             //Debug.Log("Button released");
             SpriteRenderer_Button.sprite = unpressed;
 
-            door.SetActive(true);
+            doorOrPlatform.SetActive(isActiveAtStart);
         }
         
     }
