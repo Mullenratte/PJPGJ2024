@@ -173,8 +173,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0051851273, y: -0.10039359}
-  m_Size: {x: 1.1970901, y: 1.4685029}
+  m_Offset: {x: -0.0051851273, y: 0.09}
+  m_Size: {x: 1.53, y: 2.07}
   m_Direction: 0
 --- !u!114 &8165996109327725465
 MonoBehaviour:
@@ -198,6 +198,7 @@ MonoBehaviour:
   Gravity: 1
   Direction: {x: 1, y: 0.1}
   Velocity: {x: 3, y: 0.5}
+  stoppingAtGap: 0
   corpsePrefab: {fileID: 8035161881711870747, guid: 8a7ad05086abcf8428f571c01dd923cf, type: 3}
   anim: {fileID: 2988033566349309732}
 --- !u!114 &3006057891324071143

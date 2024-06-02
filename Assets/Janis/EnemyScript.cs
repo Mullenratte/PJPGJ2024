@@ -26,6 +26,7 @@ namespace Janis
         public float Gravity = 1.0f;
         public Vector2 Direction;
         public Vector2 Velocity;
+        public bool stoppingAtGap;
 
 
         [Header("Corpse")]
@@ -85,7 +86,7 @@ namespace Janis
             // Base Velocity
             Velocity = (Direction * MoveSpeed + new Vector2(0f, -Gravity));
 
-            if (Physics2D.Raycast(transform.position, Direction, 0.5f, GameConstants.WallCollisionMask))
+            if (Physics2D.Raycast(transform.position, Direction, 0.5f, GameConstants.WallCollisionMask) || (stoppingAtGap && isInFrontOfGap()))
             {
                 Velocity.x = -Velocity.x;
                 Direction.x = -Direction.x;
@@ -121,6 +122,11 @@ namespace Janis
         {
             Debug.Log("I Touched Grass");
             Direction = new Vector2(-Direction.x , Direction.y);
+        }
+
+        private bool isInFrontOfGap()
+        {
+            return !Physics2D.Raycast((Vector2)transform.position + Direction * 0.5f, Vector2.down, 0.6f, GameConstants.WallCollisionMask);
         }
     }
 }
