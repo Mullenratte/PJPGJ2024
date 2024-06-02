@@ -57,6 +57,18 @@ namespace Janis
             // Resolve Movement
             Direction = Direction.normalized;
             transform.position = (Vector2)transform.position + (GetVelocity() * Time.deltaTime);
+
+            if (Velocity.x > 0) {
+                transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            } else {
+                transform.rotation = Quaternion.Euler(0f, 0, 0f);
+            }
+
+            if (Mathf.Abs(Velocity.x) > 0) {
+                anim.SetBool("IsWalking", true);
+            } else {
+                anim.SetBool("IsWalking", false);
+            }
         }
 
         private Vector2 GetVelocity()
