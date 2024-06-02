@@ -8,7 +8,7 @@ namespace Janis
 {
     public enum EMovementMode
     {
-        WallBouncer,
+        WallBouncer, FlyingBat,
         
     }
     [RequireComponent(typeof(Collider2D))]
@@ -21,7 +21,6 @@ namespace Janis
         public UnityEvent<Collision2D> OnTouchedGameObject;
         public EMovementMode MovementMode = EMovementMode.WallBouncer;
         public Collider2D GroundCollider2D;
-        public Transform StepHeight;
 
         [Header("Stats")]
         public float MoveSpeed = 1.0f;
@@ -39,10 +38,19 @@ namespace Janis
         [Header("Visuals")]
         [SerializeField] private Animator anim;
 
+        [Header("Connected")]
+        [SerializeField] private Player player;
+
+        private Vector2 spawn;
+        private int state;
+
         private void Awake()
         {
             healthSystem = GetComponent<HealthSystem>();
             entitySounds = GetComponent<EntitySounds>();
+            GroundCollider2D = GetComponent<Collider2D>();
+            spawn = transform.position;
+            state = 0; //idle
         }
         private void Start() {
             if (healthSystem != null) {
@@ -87,6 +95,7 @@ namespace Janis
             switch (MovementMode)
             {
                 case EMovementMode.WallBouncer: return WallBouncer();
+                case EMovementMode.FlyingBat: return FlyingBat();
                 default: return Vector2.zero;
             }
         }
@@ -110,21 +119,42 @@ namespace Janis
             return Velocity;
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private Vector2 FlyingBat()
         {
-            switch (MovementMode)
+            switch (state)
             {
-                case EMovementMode.WallBouncer:
-                    if (other.GetContact(0).point.y > StepHeight.position.y)
+                case 0:
+                    if (Math.Abs(spawn.x - transform.position.x) > 5)
                     {
-                        Debug.Log("I Touched Grass");
-                        Direction = new Vector2(-Direction.x , Direction.y);
+                        Velocity.x = -Velocity.x;
+                        Direction.x = -Direction.x;
+                    }
+                    if (Math.Abs(transform.position.x - player.transform.position.x) < 0.5)
+                    {
+                        Velocity.x = 0f;
+                        Velocity.y = -10f;
+                        state = 1;
                     }
                     break;
-                    
-                default: break; 
+                case 1:
+                    if (Physics2D.Raycast(transform.position, Vector2.down, 0.5f, GameConstants.WallCollisionMask))
+                    {
+                        Velocity.y = 20f;
+                        transform.position = (Vector2)transform.position + Velocity;
+                        Velocity.y = 0f;
+                        state = 2;
+                    }
+                    break;
+                default:
+                    break;
             }
-            
+     
+
+            return Velocity;
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {           
             OnTouchedGameObject.Invoke(other);
         }
 
