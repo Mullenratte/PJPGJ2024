@@ -70,10 +70,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8b7aab252a3a5b249a15a0cbfbc170f3, type: 3}
+  m_SortingLayerID: 1147314091
+  m_SortingLayer: 2
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: 85de0a58094d4e74295d1bcbe115b907, type: 3}
   m_Color: {r: 0.64705884, g: 0.7647059, b: 0.6509804, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3726191362262958771}
   - component: {fileID: 4798809091560525137}
   m_Layer: 8
-  m_Name: Corpse_Blob
+  m_Name: Corpse_Bat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bcf9a8f834edae4a9c2c39c02c006cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  corpseStats: {fileID: 11400000, guid: 2326ce17ab94f634d85de3d2d61c0a16, type: 2}
+  corpseStats: {fileID: 11400000, guid: faa52ef5aa441344b83cd81f562bcc21, type: 2}
 --- !u!50 &3726191362262958771
 Rigidbody2D:
   serializedVersion: 4
@@ -191,7 +191,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.016654015, y: -0.059758067}
+  m_Offset: {x: -0.0016202927, y: -0.029690742}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -202,5 +202,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.91359043, y: 0.88432884}
+  m_Size: {x: 0.6630286, y: 1.9266663}
   m_EdgeRadius: 0
