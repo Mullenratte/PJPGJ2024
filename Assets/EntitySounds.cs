@@ -82,7 +82,6 @@ namespace Audio
                 _movingSource.Stop();
                 _movingSource.clip = WalkSounds[Random.Range(0, WalkSounds.Length)];
                 _movingSource.Play();
-                Debug.Log("PLAY");
             }
         }
     }

@@ -143,9 +143,9 @@ MonoBehaviour:
   DamagedSound: {fileID: 8300000, guid: cc2105532665a5a4e83c7829b2ddeab0, type: 3}
   DeathSound: {fileID: 8300000, guid: e8db987e7ab123c4997a888e79733837, type: 3}
   WalkSoundSpeed: 0.34
-  WalkVolume: 0.05
-  DamagedVolume: 1
-  DeathVolume: 1
+  WalkVolume: 0.01
+  DamagedVolume: 0.1
+  DeathVolume: 0.1
   IsWalking: 1
 --- !u!82 &6182373497424821885
 AudioSource:

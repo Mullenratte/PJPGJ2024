@@ -29,8 +29,6 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void Attack() {
-        Debug.Log("Attack Triggered");
-
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackHitbox.transform.position, hitboxRadius, enemyLayer);
 
         foreach (var enemy in enemies) {

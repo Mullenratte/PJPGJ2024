@@ -23,6 +23,7 @@ namespace Audio
             {
                 hasStartedPlaying = true;
                 AS.clip = AC;
+                AS.volume = Volume;
                 AS.Play();
             }
 
