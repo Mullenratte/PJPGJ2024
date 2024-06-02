@@ -34568,6 +34568,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6786281894589158061, guid: fcb28ae79cab13e4787ea01ff4d10f9b, type: 3}
+      propertyPath: walkableLayers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786281894589158061, guid: fcb28ae79cab13e4787ea01ff4d10f9b, type: 3}
+      propertyPath: walkableLayers.Array.data[2].m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 8281086905947956198, guid: fcb28ae79cab13e4787ea01ff4d10f9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.76
@@ -34679,8 +34687,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 685254580170955780, guid: dcfd82f1c80094b4ebca2cde378ca8ba, type: 3}
-      propertyPath: GroundCollider2D
-      value: 
+      propertyPath: damage
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6044757856253849186, guid: dcfd82f1c80094b4ebca2cde378ca8ba, type: 3}
       propertyPath: m_LocalPosition.x

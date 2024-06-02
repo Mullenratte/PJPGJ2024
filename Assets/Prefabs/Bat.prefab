@@ -199,6 +199,7 @@ MonoBehaviour:
   Direction: {x: 1, y: 0.1}
   Velocity: {x: 3, y: 0.5}
   stoppingAtGap: 0
+  damage: 1
   corpsePrefab: {fileID: 8035161881711870747, guid: 8a7ad05086abcf8428f571c01dd923cf, type: 3}
   corpseLayer:
     serializedVersion: 2
