@@ -1,4 +1,5 @@
 using Janis;
+using System.Collections;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -24,7 +25,9 @@ public class Player : MonoBehaviour
         }
     }
     private bool isCarryingObject;
+    private bool canTakeDamage = true;
 
+    private float hitTimer = 0f;
     private float jumpHeightPenaltyMultiplier = 1f;
     private float walkSpeedPenaltyMultiplier = 1f;
     private float dropObjectPositionXOffset;
@@ -35,11 +38,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float deceleration;
     [SerializeField] private float velocityMax;
     [SerializeField] private float jumpStrength;
+    [SerializeField] private float invincibilityDuration = 1.5f;
     [SerializeField] private LayerMask[] walkableLayers;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Transform grabHitbox;
     [SerializeField] private Transform carryTransform;
     [SerializeField] private Transform groundCheckTransform;
+
 
     public enum State { 
         Grounded,
@@ -159,11 +164,24 @@ public class Player : MonoBehaviour
         state = State.Airborne;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnCollisionStay2D(Collision2D collision) {
         if (enemyLayer.value == (1 << collision.gameObject.layer)) {
             collision.gameObject.TryGetComponent<EnemyScript>(out EnemyScript enemy);
-            healthSystem.Damage(enemy.damage);
+            if (canTakeDamage) { 
+                healthSystem.Damage(enemy.damage);
+                if (hitTimer == 0f) StartCoroutine(StartInvincibility());
+            } 
         }
+    }
+
+    IEnumerator StartInvincibility() {
+        while (hitTimer < invincibilityDuration) {
+            hitTimer += Time.deltaTime;
+            canTakeDamage = false;
+            yield return 0;
+        }
+        canTakeDamage = true;
+        hitTimer = 0f;
     }
 
     private void TryGrab() {
