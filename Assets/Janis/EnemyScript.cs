@@ -131,7 +131,7 @@ namespace Janis
                         Velocity.x = -Velocity.x;
                         Direction.x = -Direction.x;
                     }
-                    if (Math.Abs(transform.position.x - player.transform.position.x) < 0.5 && transform.position.y - player.transform.position.y < 5.5)
+                    if (Math.Abs(transform.position.x - player.transform.position.x) < 0.5 && Math.Abs(transform.position.y - player.transform.position.y) < 5.5 && player.transform.position.y < transform.position.y)
                     {
                         Velocity.x = 0f;
                         Velocity.y = -10f;

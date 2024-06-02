@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SO_CorpseStats_Bat
   m_EditorClassIdentifier: 
   walkSpeedPenalty: 0.3
-  jumpHeightPenalty: 0
+  jumpHeightPenalty: 0.2
   isBlockingJump: 1

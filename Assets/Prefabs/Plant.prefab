@@ -148,16 +148,16 @@ MonoBehaviour:
       m_Calls: []
   MovementMode: 0
   GroundCollider2D: {fileID: 0}
-  StepHeight: {fileID: 0}
   MoveSpeed: 1
   Gravity: 1
   Direction: {x: 0, y: 0}
   Velocity: {x: 0, y: 0}
   stoppingAtGap: 0
-  damage: 0
+  damage: 5
   corpsePrefab: {fileID: 0}
   corpseLayer:
     serializedVersion: 2
     m_Bits: 0
   onDeathAudioSourcePrefab: {fileID: 0}
   anim: {fileID: 0}
+  player: {fileID: 0}
