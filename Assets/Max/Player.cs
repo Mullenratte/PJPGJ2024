@@ -132,10 +132,13 @@ public class Player : MonoBehaviour
         } else {
             velocitySignMultiplier = -1f;
         }
+        Debug.Log(rb.velocity.x);
 
         if (moveDir == Vector3.zero) {
-            rb.AddForce(new Vector2(1f, 0f) * velocitySignMultiplier * Mathf.Sign(rb.velocity.x) * deceleration * Time.fixedDeltaTime);
+            rb.velocity = new Vector2(Mathf.MoveTowards(rb.velocity.x, 0f, Time.deltaTime * deceleration), rb.velocity.y);
         }
+
+
 
         Collider2D[] hits = Physics2D.OverlapBoxAll(groundCheckTransform.position, new Vector2(0.1f, 0.1f), 0);
 
