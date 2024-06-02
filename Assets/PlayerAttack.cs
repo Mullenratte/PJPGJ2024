@@ -12,6 +12,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float hitboxRadius;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private int attackDamage = 1;
+    [SerializeField] private GameObject onPunchedAudioPrefab;
+
 
     private void Start() {
         input = new InputActions();
@@ -35,8 +37,10 @@ public class PlayerAttack : MonoBehaviour
             if (enemy.GetComponent<EnemyScript>() != null) {
                 enemy.TryGetComponent<HealthSystem>(out HealthSystem enemyHealthSystem);
                 enemyHealthSystem.Damage(attackDamage);
+                
             }
         }
+        Instantiate(onPunchedAudioPrefab, transform.position, Quaternion.identity);
     }
 
     private void OnDrawGizmos() {

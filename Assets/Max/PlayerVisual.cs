@@ -40,7 +40,6 @@ public class PlayerVisual : MonoBehaviour
     }
 
     private void PlayerAttack_OnAttack(object sender, System.EventArgs e) {
-
         anim.SetTrigger("OnAttack");
     }
 

@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
     }
 
     private void HealthSystem_OnDeath(object sender, System.EventArgs e) {
-        Debug.Log("You died!");
+        GameManager.instance.ShowGameOverScreen();
         Destroy(gameObject);
     }
 

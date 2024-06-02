@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     private InputActions input;
 
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject gameOverCanvas;
+    [SerializeField] private GameObject sceneLoaderObject;
 
     private bool isPaused;
 
@@ -35,6 +37,16 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
         input.Player.Pause.performed += Pause_performed;
+    }
+
+    public void ShowGameOverScreen() {
+        PauseGame();
+        gameOverCanvas.SetActive(true);
+    }
+
+    public void ReloadLevel() {
+        UnpauseGame();
+        sceneLoaderObject.SetActive(true);
     }
 
     private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
