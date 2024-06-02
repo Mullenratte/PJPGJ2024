@@ -230,8 +230,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 6786281894589158061}
   onHurtAudioPrefab: {fileID: 4819410409155337053, guid: 43c4362caa853dc4783b1efa32e0f00a, type: 3}
-  onJumpedAudioPrefab: {fileID: 4819410409155337053, guid: 70ed1c67172f4854ab1b4d9ee0aafb9c, type: 3}
-  onLandedAudioPrefab: {fileID: 4819410409155337053, guid: 7c9158745c6ec6247bf8a5f577e27668, type: 3}
+  onLandedAudioPrefab: {fileID: 4819410409155337053, guid: f95a74306dd71d148bb8e7a980da48bd, type: 3}
+  onJumpedAudioPrefab: {fileID: 4819410409155337053, guid: 20e43e20e3e0b0d4eb11c483d182896f, type: 3}
 --- !u!114 &211392676210763217
 MonoBehaviour:
   m_ObjectHideFlags: 0
