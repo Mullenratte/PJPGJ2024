@@ -8,9 +8,20 @@ public class Platform : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private BoxCollider2D BoxCollider;
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void Awake()
     {
-        Debug.Log("Entered");
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject == player.gameObject)
+        {
+            BoxCollider.enabled = false;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        BoxCollider.enabled = true;
     }
 }
