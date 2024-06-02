@@ -102,11 +102,7 @@ MonoBehaviour:
   Gravity: 3
   Direction: {x: 1, y: 0}
   Velocity: {x: 3, y: 0}
-  stoppingAtGap: 0
   corpsePrefab: {fileID: 8035161881711870747, guid: f2ac34e643847594ea03893659b71723, type: 3}
-  corpseLayer:
-    serializedVersion: 2
-    m_Bits: 256
   anim: {fileID: 8760863106740569385}
 --- !u!114 &5337825188510305555
 MonoBehaviour:

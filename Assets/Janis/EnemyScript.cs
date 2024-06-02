@@ -31,7 +31,6 @@ namespace Janis
 
         [Header("Corpse")]
         [SerializeField] private GameObject corpsePrefab;
-        [SerializeField] private LayerMask corpseLayer;
 
         [Header("Visuals")]
         [SerializeField] private Animator anim;
@@ -87,7 +86,7 @@ namespace Janis
             // Base Velocity
             Velocity = (Direction * MoveSpeed + new Vector2(0f, -Gravity));
 
-            if (Physics2D.Raycast(transform.position, Direction, 0.5f, GameConstants.WallCollisionMask) || (stoppingAtGap && isInFrontOfGap()) || isInFrontOfCorpse())
+            if (Physics2D.Raycast(transform.position, Direction, 0.5f, GameConstants.WallCollisionMask) || (stoppingAtGap && isInFrontOfGap()))
             {
                 Velocity.x = -Velocity.x;
                 Direction.x = -Direction.x;
@@ -128,11 +127,6 @@ namespace Janis
         private bool isInFrontOfGap()
         {
             return !Physics2D.Raycast((Vector2)transform.position + Direction * 0.5f, Vector2.down, 0.6f, GameConstants.WallCollisionMask);
-        }
-
-        private bool isInFrontOfCorpse()
-        {
-            return Physics2D.Raycast((Vector2)transform.position, Direction, 0.5f, corpseLayer.value);
         }
     }
 }
