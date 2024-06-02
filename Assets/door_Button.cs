@@ -6,7 +6,7 @@ using UnityEngine;
 public class door_Button : MonoBehaviour
 {
     [SerializeField]LayerMask playerLayer;
-    [SerializeField]LayerMask enemyLayer;
+    [SerializeField]LayerMask corpseLayer;
     SpriteRenderer SpriteRenderer_Button;
     BoxCollider2D BoxCollider2D;
     private bool isPressed = false;
@@ -26,7 +26,7 @@ public class door_Button : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((1 << collision.gameObject.layer) == playerLayer.value || (1 << collision.gameObject.layer) == enemyLayer.value)
+        if ((1 << collision.gameObject.layer) == playerLayer.value || (1 << collision.gameObject.layer) == corpseLayer.value)
         {
             isPressed = true;
             //Debug.Log("Button pressed");
