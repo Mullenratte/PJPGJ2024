@@ -25,11 +25,12 @@ namespace Audio
                 AS.clip = AC;
                 AS.volume = Volume;
                 AS.Play();
+                
             }
 
             if (hasStartedPlaying && !AS.isPlaying)
             {
-                Destroy(this);
+                Destroy(this.gameObject);
             }
         }
     }

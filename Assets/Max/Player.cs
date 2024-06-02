@@ -1,4 +1,5 @@
 using Janis;
+using System;
 using System.Collections;
 using System.Linq;
 using Unity.VisualScripting;
@@ -44,6 +45,10 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform grabHitbox;
     [SerializeField] private Transform carryTransform;
     [SerializeField] private Transform groundCheckTransform;
+
+    public event Action OnDamaged;
+    public event Action OnJumped;
+    public event Action OnLanded;
 
 
     public enum State { 
@@ -162,6 +167,7 @@ public class Player : MonoBehaviour
         Vector2 jumpVec = new Vector2(0f, jumpStrength);
         rb.AddForce(jumpVec * jumpHeightPenaltyMultiplier);
         state = State.Airborne;
+        OnJumped?.Invoke();
     }
 
     private void OnCollisionStay2D(Collision2D collision) {
@@ -169,6 +175,7 @@ public class Player : MonoBehaviour
             collision.gameObject.TryGetComponent<EnemyScript>(out EnemyScript enemy);
             if (canTakeDamage) { 
                 healthSystem.Damage(enemy.damage);
+                OnDamaged?.Invoke();
                 if (hitTimer == 0f) StartCoroutine(StartInvincibility());
             } 
         }

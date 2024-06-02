@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerVisual : MonoBehaviour
 {
     [SerializeField] private Player player;
+    [SerializeField] private GameObject onHurtAudioPrefab;
+    [SerializeField] private GameObject onLandedAudioPrefab;
+    [SerializeField] private GameObject onJumpedAudioPrefab;
     private PlayerAttack playerAttack;
     private Animator anim;
 
@@ -15,6 +18,24 @@ public class PlayerVisual : MonoBehaviour
 
     private void Start() {
         playerAttack.OnAttack += PlayerAttack_OnAttack;
+        player.OnDamaged += Player_OnDamaged;
+        player.OnJumped += Player_OnJumped;
+        player.OnLanded += Player_OnLanded;
+    }
+
+    private void Player_OnLanded() {
+        Debug.Log("landed!");
+        Instantiate(onLandedAudioPrefab, transform.position, Quaternion.identity);
+
+    }
+
+    private void Player_OnJumped() {
+        Instantiate(onJumpedAudioPrefab, transform.position, Quaternion.identity);
+    }
+
+    private void Player_OnDamaged() {
+        anim.SetTrigger("OnDamaged");
+        Instantiate(onHurtAudioPrefab, transform.position, Quaternion.identity);
     }
 
     private void PlayerAttack_OnAttack(object sender, System.EventArgs e) {
