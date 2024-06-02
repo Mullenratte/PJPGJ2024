@@ -1,3 +1,4 @@
+using Audio;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,6 +15,7 @@ namespace Janis
     public class EnemyScript : MonoBehaviour
     {
         private HealthSystem healthSystem;
+        private EntitySounds entitySounds;
 
         [Header("Behaviour")]
         public UnityEvent<Collision2D> OnTouchedGameObject;
@@ -32,6 +34,7 @@ namespace Janis
         [Header("Corpse")]
         [SerializeField] private GameObject corpsePrefab;
         [SerializeField] private LayerMask corpseLayer;
+        [SerializeField] private GameObject onDeathAudioSourcePrefab;
 
         [Header("Visuals")]
         [SerializeField] private Animator anim;
@@ -39,6 +42,7 @@ namespace Janis
         private void Awake()
         {
             healthSystem = GetComponent<HealthSystem>();
+            entitySounds = GetComponent<EntitySounds>();
         }
         private void Start() {
             healthSystem.OnDamaged += HealthSystem_OnDamaged;
@@ -47,10 +51,12 @@ namespace Janis
 
         private void HealthSystem_OnDamaged(object sender, HealthSystem.OnDamagedEventArgs e) {
             anim.SetTrigger("OnDamaged");
+            entitySounds.PlayDamagedSound();
         }
 
         private void HealthSystem_OnDeath(object sender, EventArgs e) {
             Instantiate(corpsePrefab, this.transform.position, Quaternion.identity);
+            Instantiate(onDeathAudioSourcePrefab, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
 

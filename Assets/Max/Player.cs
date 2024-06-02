@@ -132,7 +132,6 @@ public class Player : MonoBehaviour
             foreach (var layer in walkableLayers) {
                 if (layer.value == (1 << hit.gameObject.layer)) {
                     this.state = State.Grounded;
-                    Debug.Log("standing on " + hit.gameObject.name + " with state: " + state);
                     return;
                 } else {
                     this.state = State.Airborne;

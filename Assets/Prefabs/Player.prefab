@@ -364,7 +364,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 5000
-  velocityMax: 10
+  deceleration: 2500
+  velocityMax: 7
   jumpStrength: 1000
   walkableLayers:
   - serializedVersion: 2
