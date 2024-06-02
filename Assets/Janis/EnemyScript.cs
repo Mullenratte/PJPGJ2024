@@ -133,7 +133,7 @@ namespace Janis
 
         private bool isInFrontOfGap()
         {
-            return !Physics2D.Raycast((Vector2)transform.position + Direction * 0.5f, Vector2.down, 0.6f, GameConstants.WallCollisionMask);
+            return !Physics2D.Raycast((Vector2)transform.position + Direction * 0.5f, Vector2.down, 1.4f, GameConstants.WallCollisionMask);
         }
 
         private bool isInFrontOfCorpse()
