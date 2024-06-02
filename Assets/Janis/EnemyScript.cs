@@ -43,6 +43,7 @@ namespace Janis
 
         private Vector2 spawn;
         private int state;
+        private Vector2 startV;
 
         private void Awake()
         {
@@ -50,6 +51,7 @@ namespace Janis
             entitySounds = GetComponent<EntitySounds>();
             GroundCollider2D = GetComponent<Collider2D>();
             spawn = transform.position;
+            startV = Velocity;
             state = 0; //idle
         }
         private void Start() {
@@ -129,7 +131,7 @@ namespace Janis
                         Velocity.x = -Velocity.x;
                         Direction.x = -Direction.x;
                     }
-                    if (Math.Abs(transform.position.x - player.transform.position.x) < 0.5)
+                    if (Math.Abs(transform.position.x - player.transform.position.x) < 0.5 && transform.position.y - player.transform.position.y < 5.5)
                     {
                         Velocity.x = 0f;
                         Velocity.y = -10f;
@@ -139,13 +141,28 @@ namespace Janis
                 case 1:
                     if (Physics2D.Raycast(transform.position, Vector2.down, 0.5f, GameConstants.WallCollisionMask))
                     {
-                        Velocity.y = 20f;
-                        transform.position = (Vector2)transform.position + Velocity;
-                        Velocity.y = 0f;
+                        Velocity.y = 1f;
                         state = 2;
                     }
                     break;
+                case 2:
+                    if (!Physics2D.Raycast(transform.position, Vector2.down, 1f, GameConstants.WallCollisionMask))
+                    {
+                        Velocity.y = 0f;
+                        state = 3;
+                    }
+                    break;
+                 case 100:
+                    Velocity.y = 1.5f;
+                    if (Math.Abs(transform.position.y - spawn.y) < 0.1)
+                    {
+                        Velocity.y = 0;                        
+                        Velocity.x = startV.x;
+                        state = 0;
+                    }
+                    break;
                 default:
+                    state++;
                     break;
             }
      
