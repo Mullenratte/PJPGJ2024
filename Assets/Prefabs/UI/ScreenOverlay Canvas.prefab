@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f390df17757b22245a9e65e682d5bfb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSystem: {fileID: 0}
+  healthSystem: {fileID: 302031691319287555, guid: fcb28ae79cab13e4787ea01ff4d10f9b, type: 3}
   heartFullPrefab: {fileID: 4938409842573136331, guid: 52de7557e27b03e4b8633ad8008f4b87, type: 3}
 --- !u!1 &7709695363607869003
 GameObject:
