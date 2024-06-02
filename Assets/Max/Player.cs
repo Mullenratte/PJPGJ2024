@@ -103,6 +103,10 @@ public class Player : MonoBehaviour
         input.Disable();
     }
 
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireCube(groundCheckTransform.position, new Vector2(0.1f, 0.1f));
+    }
+
     private void FixedUpdate() {
         if (Mathf.Abs(rb.velocity.x) < this.velocityMax) {
             rb.AddForce(moveDir * acceleration * Time.fixedDeltaTime * walkSpeedPenaltyMultiplier);
@@ -116,7 +120,8 @@ public class Player : MonoBehaviour
             foreach (var layer in walkableLayers) {
                 if (layer.value == (1 << hit.gameObject.layer)) {
                     this.state = State.Grounded;
-                    break;
+                    Debug.Log("standing on " + hit.gameObject.name + " with state: " + state);
+                    return;
                 } else {
                     this.state = State.Airborne;
                 }
@@ -240,6 +245,8 @@ public class Player : MonoBehaviour
     public Vector2 GetVelocity() {
         return rb.velocity;
     }
+
+
 }
 
 
