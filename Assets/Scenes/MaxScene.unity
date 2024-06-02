@@ -34832,6 +34832,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bat
       objectReference: {fileID: 0}
+    - target: {fileID: 8165996109327725465, guid: f3f1b16ab8f95de43823d4443e6c9e29, type: 3}
+      propertyPath: onDeathAudioSourcePrefab
+      value: 
+      objectReference: {fileID: 4819410409155337053, guid: c3e8f865295b45c47bb10caed359080e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

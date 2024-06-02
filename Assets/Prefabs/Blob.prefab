@@ -111,6 +111,7 @@ MonoBehaviour:
   corpseLayer:
     serializedVersion: 2
     m_Bits: 256
+  onDeathAudioSourcePrefab: {fileID: 4819410409155337053, guid: c3e8f865295b45c47bb10caed359080e, type: 3}
   anim: {fileID: 8760863106740569385}
 --- !u!114 &5337825188510305555
 MonoBehaviour:
@@ -142,7 +143,7 @@ MonoBehaviour:
   DamagedSound: {fileID: 8300000, guid: cc2105532665a5a4e83c7829b2ddeab0, type: 3}
   DeathSound: {fileID: 8300000, guid: e8db987e7ab123c4997a888e79733837, type: 3}
   WalkSoundSpeed: 0.34
-  WalkVolume: 0.006
+  WalkVolume: 0.05
   DamagedVolume: 1
   DeathVolume: 1
   IsWalking: 1
