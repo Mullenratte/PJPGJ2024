@@ -231,7 +231,10 @@ MonoBehaviour:
   player: {fileID: 6786281894589158061}
   onHurtAudioPrefab: {fileID: 4819410409155337053, guid: 43c4362caa853dc4783b1efa32e0f00a, type: 3}
   onLandedAudioPrefab: {fileID: 4819410409155337053, guid: f95a74306dd71d148bb8e7a980da48bd, type: 3}
-  onJumpedAudioPrefab: {fileID: 4819410409155337053, guid: 20e43e20e3e0b0d4eb11c483d182896f, type: 3}
+  onJumpedAudioPrefabs:
+  - {fileID: 4819410409155337053, guid: 20e43e20e3e0b0d4eb11c483d182896f, type: 3}
+  - {fileID: 4819410409155337053, guid: 5f8c59da9be845b4fb520f856958e4a4, type: 3}
+  - {fileID: 4819410409155337053, guid: fd186b90c1330c44e81d82f7f82d613d, type: 3}
 --- !u!114 &211392676210763217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,7 +307,7 @@ CapsuleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -342,14 +345,14 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 3.5
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 4.5
   m_Material: {fileID: 6200000, guid: 13c37b64d5902d743a10a650ee2aa7b1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -376,6 +379,8 @@ MonoBehaviour:
     m_Bits: 256
   - serializedVersion: 2
     m_Bits: 64
+  - serializedVersion: 2
+    m_Bits: 512
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -504,7 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _music: {fileID: 8300000, guid: d0449a9f799a55049bdc17f7ca5acdba, type: 3}
-  _volume: 0.267
+  _volume: 0.5
 --- !u!1 &8087037341853754545
 GameObject:
   m_ObjectHideFlags: 0
