@@ -111,7 +111,6 @@ public class Player : MonoBehaviour
         }
         Collider2D[] hits = Physics2D.OverlapBoxAll(groundCheckTransform.position, new Vector2(0.1f, 0.1f), 0);
 
-        Debug.Log(state);
         foreach (var hit in hits) {
             foreach (var layer in walkableLayers) {
                 if (layer.value == (1 << hit.gameObject.layer)) {
@@ -122,14 +121,6 @@ public class Player : MonoBehaviour
                 }
             }           
         }
-
-
-        //RaycastHit2D[] hitObjects = Physics2D.CircleCastAll(transform.position - new Vector3(0f, coll.size.y / 3, 0f), coll.size.x, Vector2.down, 0.05f);
-        //foreach (var hit in hitObjects) {
-        //    if (walkableLayers.value == (1 << hit.collider.gameObject.layer)) {
-        //        this.state = State.Grounded;
-        //    }
-        //}
     }
 
     private void OnDrawGizmos() {
@@ -156,18 +147,6 @@ public class Player : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        //if (walkableLayers.value == (1 << collision.gameObject.layer)) {
-        //    state = State.Grounded;
-        //}
-
-        //RaycastHit2D[] raycastHits = Physics2D.RaycastAll(transform.position, Vector2.down, 1f);
-        //foreach (var hit in raycastHits) {
-        //    if ((1 << hit.collider.gameObject.layer) == enemyLayer.value) {
-        //        state = State.Grounded;
-        //        break;
-        //    }
-        //}
-
         if (enemyLayer.value == (1 << collision.gameObject.layer)) {
             collision.gameObject.TryGetComponent<EnemyScript>(out EnemyScript enemy);
             healthSystem.Damage(/*enemy.damage*/1);
@@ -189,7 +168,7 @@ public class Player : MonoBehaviour
         if(this.PickedObject == null) {
             TryPickUpObject(pickableObject);
         } else {
-            DropPickedObject();
+            TryDropPickedObject();
         }        
     }
 
@@ -208,9 +187,25 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void DropPickedObject() {
+    private void TryDropPickedObject() {
+        Vector2 dropOffPosition = new Vector2(carryTransform.position.x + dropObjectPositionXOffset, carryTransform.position.y);
+
+        Collider2D[] hits = Physics2D.OverlapBoxAll(dropOffPosition, Vector2.one * .8f, 0);
+
+        foreach (var hit in hits) {
+            foreach (var layer in walkableLayers) {
+                if (layer.value == (1 << hit.gameObject.layer)) {
+                    return;
+                }
+            }
+        }
+
+        DropPickedObject(dropOffPosition);
+    }
+
+    private void DropPickedObject(Vector2 dropOffPosition) {
         PickedObject.transform.SetParent(null);
-        PickedObject.transform.position = new Vector2(carryTransform.position.x + dropObjectPositionXOffset, carryTransform.position.y);
+        PickedObject.transform.position = dropOffPosition;
 
         PickedObject.TryGetComponent<Rigidbody2D>(out Rigidbody2D pickedObjectRigidbody);
         pickedObjectRigidbody.simulated = true;
