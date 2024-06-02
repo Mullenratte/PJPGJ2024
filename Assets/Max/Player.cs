@@ -34,10 +34,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float velocityMax;
     [SerializeField] private float jumpStrength;
-    [SerializeField] private LayerMask walkableLayer;
+    [SerializeField] private LayerMask[] walkableLayers;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Transform grabHitbox;
     [SerializeField] private Transform carryTransform;
+    [SerializeField] private Transform groundCheckTransform;
 
     public enum State { 
         Grounded,
@@ -108,9 +109,22 @@ public class Player : MonoBehaviour
         } else {
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * velocityMax, rb.velocity.y);
         }
+
+        Collider2D[] hits = Physics2D.OverlapBoxAll(groundCheckTransform.position, new Vector2(0.1f, 0.1f), 0);
+
+        foreach (var hit in hits) {
+            foreach (var layer in walkableLayers) {
+                if (layer.value == (1 << hit.gameObject.layer)) {
+                    this.state = State.Grounded;
+                    break;
+                } else {
+                    this.state = State.Airborne;
+                }
+            }
+        }
     }
 
-    private void TryJump() {
+        private void TryJump() {
         switch (state) {
             case State.Grounded:
                 Jump();
@@ -130,18 +144,6 @@ public class Player : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (walkableLayer.value == (1 << collision.gameObject.layer)) {
-            state = State.Grounded;
-        }
-
-        RaycastHit2D[] raycastHits = Physics2D.RaycastAll(transform.position, Vector2.down, 1f);
-        foreach (var hit in raycastHits) {
-            if ((1 << hit.collider.gameObject.layer) == enemyLayer.value) {
-                state = State.Grounded;
-                break;
-            }
-        }
-
         if (enemyLayer.value == (1 << collision.gameObject.layer)) {
             collision.gameObject.TryGetComponent<EnemyScript>(out EnemyScript enemy);
             healthSystem.Damage(/*enemy.damage*/1);
@@ -167,7 +169,7 @@ public class Player : MonoBehaviour
         if(this.PickedObject == null) {
             TryPickUpObject(pickableObject);
         } else {
-            DropPickedObject();
+            TryDropPickedObject();
         }        
     }
 
@@ -186,9 +188,26 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void DropPickedObject() {
+    private void TryDropPickedObject() {
+        Vector2 dropOffPosition = new Vector2(carryTransform.position.x + dropObjectPositionXOffset, carryTransform.position.y);
+
+        Collider2D[] hits = Physics2D.OverlapBoxAll(dropOffPosition, Vector2.one * .8f, 0);
+
+        foreach (var hit in hits) {
+            foreach (var layer in walkableLayers) {
+                if (layer.value == (1 << hit.gameObject.layer)) {
+                    return;
+                }
+            }
+        }
+
+        DropPickedObject(dropOffPosition);
+    }
+
+    private void DropPickedObject(Vector2 dropOffPosition) {
         PickedObject.transform.SetParent(null);
         PickedObject.transform.position = new Vector2(carryTransform.position.x + dropObjectPositionXOffset, carryTransform.position.y);
+        PickedObject.transform.position = dropOffPosition;
 
         PickedObject.TryGetComponent<Rigidbody2D>(out Rigidbody2D pickedObjectRigidbody);
         pickedObjectRigidbody.simulated = true;
