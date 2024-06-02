@@ -253,6 +253,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   attackDamage: 1
+  onPunchedAudioPrefab: {fileID: 4819410409155337053, guid: 037f785412b312440904b30513ec11d6, type: 3}
 --- !u!1 &6663201539526789785
 GameObject:
   m_ObjectHideFlags: 0

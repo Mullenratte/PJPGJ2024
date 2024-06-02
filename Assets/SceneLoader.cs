@@ -6,6 +6,6 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     private void OnEnable() {
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("ArneScene", LoadSceneMode.Single);
     }
 }

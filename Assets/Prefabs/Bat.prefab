@@ -176,8 +176,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0051851273, y: 0.09}
-  m_Size: {x: 1.53, y: 2.07}
+  m_Offset: {x: -0.0051851273, y: 0.12458038}
+  m_Size: {x: 1.53, y: 2.0008392}
   m_Direction: 0
 --- !u!114 &8165996109327725465
 MonoBehaviour:
@@ -194,13 +194,12 @@ MonoBehaviour:
   OnTouchedGameObject:
     m_PersistentCalls:
       m_Calls: []
-  MovementMode: 0
-  GroundCollider2D: {fileID: 0}
-  StepHeight: {fileID: 0}
+  MovementMode: 1
+  GroundCollider2D: {fileID: 2448908435299678298}
   MoveSpeed: 2.5
   Gravity: 1
   Direction: {x: 1, y: 0.1}
-  Velocity: {x: 3, y: 0.5}
+  Velocity: {x: 3, y: 0}
   stoppingAtGap: 0
   damage: 1
   corpsePrefab: {fileID: 8035161881711870747, guid: 8a7ad05086abcf8428f571c01dd923cf, type: 3}
@@ -209,6 +208,7 @@ MonoBehaviour:
     m_Bits: 256
   onDeathAudioSourcePrefab: {fileID: 4819410409155337053, guid: c3e8f865295b45c47bb10caed359080e, type: 3}
   anim: {fileID: 2988033566349309732}
+  player: {fileID: 0}
 --- !u!114 &3006057891324071143
 MonoBehaviour:
   m_ObjectHideFlags: 0

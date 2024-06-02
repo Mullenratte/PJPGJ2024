@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activatedSprite: {fileID: 21300000, guid: 63f27c9802d0be2448f725c3474a4542, type: 3}
   sr: {fileID: 7117746125270658140}
+  onActivatedAudioPrefab: {fileID: 4819410409155337053, guid: f044f9452fa4011498593dd11cd313e6, type: 3}
 --- !u!61 &3671531225664911254
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -70,7 +70,8 @@ namespace Janis
         private void HealthSystem_OnDeath(object sender, EventArgs e) {
             Instantiate(corpsePrefab, this.transform.position, Quaternion.identity);
             Instantiate(onDeathAudioSourcePrefab, this.transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
 
         private void Update()
