@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
 
 
     [SerializeField] private float acceleration;
+    [SerializeField] private float deceleration;
     [SerializeField] private float velocityMax;
     [SerializeField] private float jumpStrength;
     [SerializeField] private LayerMask[] walkableLayers;
@@ -112,6 +113,17 @@ public class Player : MonoBehaviour
             rb.AddForce(moveDir * acceleration * Time.fixedDeltaTime * walkSpeedPenaltyMultiplier);
         } else {
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * velocityMax, rb.velocity.y);
+        }
+
+        float velocitySignMultiplier;
+        if (Mathf.Abs(rb.velocity.x) == 0) {
+            velocitySignMultiplier = 0f;
+        } else {
+            velocitySignMultiplier = -1f;
+        }
+
+        if (moveDir == Vector3.zero) {
+            rb.AddForce(new Vector2(1f, 0f) * velocitySignMultiplier * Mathf.Sign(rb.velocity.x) * deceleration * Time.fixedDeltaTime);
         }
 
         Collider2D[] hits = Physics2D.OverlapBoxAll(groundCheckTransform.position, new Vector2(0.1f, 0.1f), 0);
