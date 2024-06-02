@@ -37,6 +37,11 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
         input.Player.Pause.performed += Pause_performed;
+        input.Player.Restart.performed += Restart_performed;
+    }
+
+    private void Restart_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        ReloadLevel();
     }
 
     public void ShowGameOverScreen() {
