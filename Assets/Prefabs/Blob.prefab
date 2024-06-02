@@ -103,6 +103,7 @@ MonoBehaviour:
   Direction: {x: 0, y: 0}
   Velocity: {x: 0, y: 0}
   corpsePrefab: {fileID: 8035161881711870747, guid: f2ac34e643847594ea03893659b71723, type: 3}
+  anim: {fileID: 8760863106740569385}
 --- !u!114 &5337825188510305555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3446810063923712575}
   - component: {fileID: 1869446466817277617}
+  - component: {fileID: 8760863106740569385}
   m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
@@ -200,3 +202,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8760863106740569385
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9132016616590134156}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a29c2901da3de8c428b41cf78473ad36, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

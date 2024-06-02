@@ -31,6 +31,9 @@ namespace Janis
         [Header("Corpse")]
         [SerializeField] private GameObject corpsePrefab;
 
+        [Header("Visuals")]
+        [SerializeField] private Animator anim;
+
         private void Awake()
         {
             healthSystem = GetComponent<HealthSystem>();
@@ -41,7 +44,7 @@ namespace Janis
         }
 
         private void HealthSystem_OnDamaged(object sender, HealthSystem.OnDamagedEventArgs e) {
-            //fire anim event?
+            anim.SetTrigger("OnDamaged");
         }
 
         private void HealthSystem_OnDeath(object sender, EventArgs e) {
