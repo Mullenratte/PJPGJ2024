@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5236816192519417621}
   - component: {fileID: 3516734517001334498}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: 202683234102997705}
   - component: {fileID: 3726191362262958771}
   - component: {fileID: 4798809091560525137}
-  m_Layer: 7
-  m_Name: Pickable Object
+  m_Layer: 8
+  m_Name: Corpse_Blob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

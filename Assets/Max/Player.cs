@@ -56,17 +56,14 @@ public class Player : MonoBehaviour
         input.Player.Jump.performed += Jump_performed;
         input.Player.Grab.performed += Grab_performed;
 
-        healthSystem.OnDamaged += HealthSystem_OnDamaged;
         healthSystem.OnDeath += HealthSystem_OnDeath;
     }
 
     private void HealthSystem_OnDeath(object sender, System.EventArgs e) {
+        Debug.Log("You died!");
         Destroy(gameObject);
     }
 
-    private void HealthSystem_OnDamaged(object sender, System.EventArgs e) {
-        Debug.Log("Damaged player!");
-    }
 
     private void Grab_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         TryGrab();

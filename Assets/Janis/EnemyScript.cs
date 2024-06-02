@@ -13,6 +13,8 @@ namespace Janis
     [RequireComponent(typeof(Collider2D))]
     public class EnemyScript : MonoBehaviour
     {
+        private HealthSystem healthSystem;
+
         [Header("Behaviour")]
         public UnityEvent<Collision2D> OnTouchedGameObject;
         public EMovementMode MovementMode = EMovementMode.WallBouncer;
@@ -26,9 +28,25 @@ namespace Janis
         public Vector2 Velocity;
 
 
+        [Header("Corpse")]
+        [SerializeField] private GameObject corpsePrefab;
+
         private void Awake()
         {
+            healthSystem = GetComponent<HealthSystem>();
+        }
+        private void Start() {
+            healthSystem.OnDamaged += HealthSystem_OnDamaged;
+            healthSystem.OnDeath += HealthSystem_OnDeath;
+        }
 
+        private void HealthSystem_OnDamaged(object sender, HealthSystem.OnDamagedEventArgs e) {
+            //fire anim event?
+        }
+
+        private void HealthSystem_OnDeath(object sender, EventArgs e) {
+            Instantiate(corpsePrefab, this.transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
         }
 
         private void Update()
