@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpStrength;
     [SerializeField] private LayerMask walkableLayer;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private LayerMask corpseLayer;
     [SerializeField] private Transform grabHitbox;
     [SerializeField] private Transform carryTransform;
 
@@ -130,7 +131,7 @@ public class Player : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (walkableLayer.value == (1 << collision.gameObject.layer)) {
+        if (walkableLayer.value == (1 << collision.gameObject.layer) || corpseLayer.value == (1 << collision.gameObject.layer)) {
             state = State.Grounded;
         }
 
