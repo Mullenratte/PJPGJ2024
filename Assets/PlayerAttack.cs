@@ -40,4 +40,8 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(attackHitbox.transform.position, hitboxRadius);
+    }
 }

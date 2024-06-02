@@ -34,10 +34,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float velocityMax;
     [SerializeField] private float jumpStrength;
-    [SerializeField] private LayerMask walkableLayer;
+    [SerializeField] private LayerMask[] walkableLayers;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Transform grabHitbox;
     [SerializeField] private Transform carryTransform;
+    [SerializeField] private Transform groundCheckTransform;
 
     public enum State { 
         Grounded,
@@ -108,6 +109,31 @@ public class Player : MonoBehaviour
         } else {
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * velocityMax, rb.velocity.y);
         }
+        Collider2D[] hits = Physics2D.OverlapBoxAll(groundCheckTransform.position, new Vector2(0.1f, 0.1f), 0);
+
+        Debug.Log(state);
+        foreach (var hit in hits) {
+            foreach (var layer in walkableLayers) {
+                if (layer.value == (1 << hit.gameObject.layer)) {
+                    this.state = State.Grounded;
+                    break;
+                } else {
+                    this.state = State.Airborne;
+                }
+            }           
+        }
+
+
+        //RaycastHit2D[] hitObjects = Physics2D.CircleCastAll(transform.position - new Vector3(0f, coll.size.y / 3, 0f), coll.size.x, Vector2.down, 0.05f);
+        //foreach (var hit in hitObjects) {
+        //    if (walkableLayers.value == (1 << hit.collider.gameObject.layer)) {
+        //        this.state = State.Grounded;
+        //    }
+        //}
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireCube(groundCheckTransform.position, new Vector2(0.1f, 0.1f));
     }
 
     private void TryJump() {
@@ -124,23 +150,23 @@ public class Player : MonoBehaviour
     private void Jump() {
         if (jumpHeightPenaltyMultiplier <= 0f) return;
 
+        state = State.Airborne;
         Vector2 jumpVec = new Vector2(0f, jumpStrength);
         rb.AddForce(jumpVec * jumpHeightPenaltyMultiplier);
-        state = State.Airborne;
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (walkableLayer.value == (1 << collision.gameObject.layer)) {
-            state = State.Grounded;
-        }
+        //if (walkableLayers.value == (1 << collision.gameObject.layer)) {
+        //    state = State.Grounded;
+        //}
 
-        RaycastHit2D[] raycastHits = Physics2D.RaycastAll(transform.position, Vector2.down, 1f);
-        foreach (var hit in raycastHits) {
-            if ((1 << hit.collider.gameObject.layer) == enemyLayer.value) {
-                state = State.Grounded;
-                break;
-            }
-        }
+        //RaycastHit2D[] raycastHits = Physics2D.RaycastAll(transform.position, Vector2.down, 1f);
+        //foreach (var hit in raycastHits) {
+        //    if ((1 << hit.collider.gameObject.layer) == enemyLayer.value) {
+        //        state = State.Grounded;
+        //        break;
+        //    }
+        //}
 
         if (enemyLayer.value == (1 << collision.gameObject.layer)) {
             collision.gameObject.TryGetComponent<EnemyScript>(out EnemyScript enemy);
@@ -148,10 +174,6 @@ public class Player : MonoBehaviour
 
         }
     }
-
-    //private void OnDrawGizmos() {
-    //    Debug.DrawRay(transform.position, Vector2.down, Color.red);
-    //}
 
     private void TryGrab() {
         GameObject pickableObject = null;
