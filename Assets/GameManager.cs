@@ -38,6 +38,11 @@ public class GameManager : MonoBehaviour
     private void Start() {
         input.Player.Pause.performed += Pause_performed;
         input.Player.Restart.performed += Restart_performed;
+        input.Player.ExitGame.performed += ExitGame_performed;
+    }
+
+    private void ExitGame_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        Application.Quit();
     }
 
     private void Restart_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
